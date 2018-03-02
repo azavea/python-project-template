@@ -1,4 +1,4 @@
-python-project-template
+Azavea data analytics team python project template
 ==============================
 
 template for Azavea Data Analytics team Python projects
