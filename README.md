@@ -5,6 +5,11 @@ A file structure template, development environment and rule set for python data 
 
 Getting Started
 ------------
+
+### Requirements:
+
+* Docker
+
 From within the root directory, first remove git tracking from the project
 
 `rm -rf .git`
@@ -15,7 +20,7 @@ If you have not already done so, build the Docker image (you will only need to d
 
 Run a Docker container
 
-`./scripts/container.sh .'
+`./scripts/container.sh .`
 
 This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `container.sh` above) will map to `/project` within the container. You can now access the full file structure of this template from within the container.
 
