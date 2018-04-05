@@ -75,5 +75,8 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
+# bash history
+.bash_history
+
 # exclude data from source control by default
-/data/
+# /data/
