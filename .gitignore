@@ -78,5 +78,8 @@ target/
 # bash history
 .bash_history
 
+#.swp files
+*.swp
+
 # exclude data from source control by default
 # /data/
