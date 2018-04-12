@@ -18,6 +18,8 @@ RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificate
     python-virtualenv \
     unzip \
     nano \
+    gdal-bin \
+    python-gdal \
     && \
 apt-get clean && \
 rm -rf /var/lib/apt/lists/*
@@ -33,11 +35,16 @@ ENV PATH /opt/conda/bin:$PATH
 COPY requirements.txt requirements.txt
 
 # pip install 
+RUN pip install --upgrade pip
 RUN pip install --no-cache -r requirements.txt &&\
     rm requirements.txt
 
+RUN pip install requests==2.18.4
+RUN conda install gdal==2.2.2
+RUN conda install rasterio==0.36.0
+
 # Open Ports for Jupyter
-EXPOSE 8000
+EXPOSE 8888
 
 #Setup File System
 RUN mkdir project
@@ -46,5 +53,8 @@ ENV SHELL=/bin/bash
 VOLUME /project
 WORKDIR /project
 
+RUN rm -rf .bash_history
+RUN rm -rf .python_history
+
 # Run a shell script
-CMD  ["/bin/bash"]
+CMD ["/bin/bash"]

@@ -58,3 +58,5 @@ widgetsnbextension==3.0.6
 jupyterlab==0.31.9
 geopandas==0.3.0
 descartes==1.1.0
+ez-setup==0.9
+urllib3==1.13.1
