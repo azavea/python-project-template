@@ -21,11 +21,15 @@ If you would like to install additional packages in the container you can add th
 
 Run the Docker container
 
-`./scripts/container.sh .'
+`./scripts/container.sh .`
 
 This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `container.sh` above) will map to `/project` within the container. You can now access the full file structure of this template from within the container.
 
 You can open an interactive environment by running `./scripts/jupyterlab.sh`then navigating to `https://localhost:8888/` in a browser. This will open [JupyterLab](https://github.com/jupyterlab/jupyterlab) in the notebooks directory of the Docker container. Return to the bash console by entering `Ctrl-C`.
+
+Test the environment
+
+`python test_environment.py`
 
 To exit container
 

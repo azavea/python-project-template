@@ -53,5 +53,8 @@ ENV SHELL=/bin/bash
 VOLUME /project
 WORKDIR /project
 
+RUN rm -rf .bash_history
+RUN rm -rf .python_history
+
 # Run a shell script
 CMD ["/bin/bash"]
