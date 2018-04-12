@@ -1,25 +1,33 @@
 Azavea Data Analytics team python project template
 ==============================
 
-A file structure template, development environment and rule set for python data analytics projects on the data analytics team
+A file structure template, development environment and rule set for python data analysis projects on Azavea's Data Analytics Team
+
+#### Requirements:
+
+* Docker
 
 Getting Started
 ------------
 From within the root directory, first remove git tracking from the project
 
-`rm -rf .git`
+`./scripts/clean.sh`
 
-If you have not already done so, build the Docker image (you will only need to do this once)
+If you have not already done so, build the Docker image (you will only need to do this once).
 
-`docker build -t da-project-template .`
+`./scripts/dockerbuild.sh`
 
-Run a Docker container
+If you would like to install additional packages in the container you can add them to `requirements.txt` and rebuild the image with the previous script.
+
+Run the Docker container
 
 `./scripts/container.sh .'
 
 This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `container.sh` above) will map to `/project` within the container. You can now access the full file structure of this template from within the container.
 
-To exit
+You can open an interactive environment by running `./scripts/jupyterlab.sh`then navigating to `https://localhost:8888/` in a browser. This will open [JupyterLab](https://github.com/jupyterlab/jupyterlab) in the notebooks directory of the Docker container. Return to the bash console by entering `Ctrl-C`.
+
+To exit container
 
 `exit`
 
