@@ -29,6 +29,13 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh
 
+RUN wget http://download.osgeo.org/libspatialindex/spatialindex-src-1.8.5.tar.gz && \
+    tar xvzf spatialindex-src-1.8.5.tar.gz && \
+    cd spatialindex-src-1.8.5 && \
+    ./configure; make; make install && \
+    ldconfig && \
+    easy_install Rtree
+
 ENV PATH /opt/conda/bin:$PATH
 
 # Copying requirements.txt file
