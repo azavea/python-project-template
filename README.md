@@ -1,44 +1,39 @@
 Azavea Data Analytics team python project template
 ==============================
 
-A file structure template, development environment and rule set for python data analysis projects on Azavea's Data Analytics Team
-
-#### Requirements:
-
-* Docker
+A file structure template, development environment and rule set for python data analytics projects on the data analytics team
 
 Getting Started
 ------------
+Change the name of folder that contains this whole repo: `python-project-template` -> `{your project name}`  
 
-##### Requirements:
+From within the repo directory, first remove git tracking from the project  
 
-* Docker
+`rm -rf .git`
 
-From within the root directory, first remove git tracking from the project
+The project template uses a placeholder name of 'da-project'. Change that name in the following files/directories (relative to the repo root):
+- `da-project/` (change the name of the folder)  
+- `Dockerfile`  
+- `./docker/run/`  
+- `./docker/build/`    
 
-`./scripts/clean.sh`
+If you have not already done so, build the Docker image (you will only need to do this once)
 
-If you have not already done so, build the Docker image (you will only need to do this once).
+`docker/build`
 
-`./scripts/dockerbuild.sh`
+Run a Docker container:
 
-If you would like to install additional packages in the container you can add them to `requirements.txt` and rebuild the image with the previous script.
+`docker/run`  
 
-Run the Docker container
+This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `run` above) will map to `/opt/src/da-project` within the container. You can now access the full file structure of this template from within the container.
 
-`./scripts/container.sh .`
+To exit:
 
-This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `container.sh` above) will map to `/project` within the container. You can now access the full file structure of this template from within the container.
+`exit`  
 
-You can open an interactive environment by running `./scripts/jupyterlab.sh`then navigating to `https://localhost:8888/` in a browser. You will see a login screen asking for a password or token. Copy the token from your console into this box. This will open [JupyterLab](https://github.com/jupyterlab/jupyterlab) in the notebooks directory of the Docker container. Return to the bash console by entering `Ctrl-C`.
+Initialize a new git repository:
 
-Test the environment
-
-`python test_environment.py`
-
-To exit container
-
-`exit`
+`git init`  
 
 Project Organization
 ------------
@@ -49,8 +44,6 @@ Project Organization
     │   ├── organized      <- Raw datasets that have been renamed or reorganized into a new folder structure but have not been changed at all      
     │   ├── processed      <- The final, canonical data sets for modeling
     │   └── raw            <- The original, immutable data dump
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details (currently not configured)
     │
     ├── guide              <- A set of markdown files with documented best practices, guidelines and rools for collaborative projects
     │
@@ -67,7 +60,7 @@ Project Organization
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
-    └── src                <- Source code for use in this project.
+    └── da-project         <- Source code for use in this project.
         │
         ├── data           <- Scripts to download or generate data
         │   └── make_dataset.py
@@ -87,4 +80,4 @@ Project Organization
 
 --------
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>.</small></p>
+<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
