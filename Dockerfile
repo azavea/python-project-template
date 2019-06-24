@@ -1,67 +1,47 @@
+FROM python:3.6-slim-stretch
 
-# Adapted from https://towardsdatascience.com/how-docker-can-help-you-become-a-more-effective-data-scientist-7fc048ef91d5
-FROM ubuntu:16.04
-
-# Adds metadata to the image as a key value pair example LABEL 
 LABEL maintainer="Simon Kassel <skassel@azavea.com>"
 
-RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
-    build-essential \
-    byobu \
-    curl \
-    git-core \
-    htop \
-    pkg-config \
-    python3-dev \
-    python-pip \
-    python-setuptools \
-    python-virtualenv \
-    unzip \
-    nano \
-    gdal-bin \
-    python-gdal \
-    && \
-apt-get clean && \
-rm -rf /var/lib/apt/lists/*
+WORKDIR /opt/src/
 
-RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.0.1-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    rm ~/anaconda.sh
+ADD requirements.txt /tmp/requirements.txt
 
-RUN wget http://download.osgeo.org/libspatialindex/spatialindex-src-1.8.5.tar.gz && \
-    tar xvzf spatialindex-src-1.8.5.tar.gz && \
-    cd spatialindex-src-1.8.5 && \
-    ./configure; make; make install && \
-    ldconfig && \
-    easy_install Rtree
+RUN apt-get update && \
+    apt-get install -y \
+        wget \
+        build-essential \
+        make \
+        gcc \
+        locales \
+        libgdal20 libgdal-dev \
+        python-dev \
+        protobuf-compiler \
+        libprotobuf-dev \
+        libtokyocabinet-dev \
+        python-psycopg2 \
+        libspatialindex-dev && \
+    python -m pip install numpy cython --no-binary numpy,cython && \
+    python -m pip install \
+        "rasterio>=1.0a12" fiona shapely rtree \
+        --pre --no-binary rasterio,fiona,shapely && \
+    python -m pip install -r /tmp/requirements.txt && \
+    python -m pip uninstall -y cython && \
+    rm -r /root/.cache/pip && \
+    apt-get remove -y --purge libgdal-dev make gcc build-essential && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
-ENV PATH /opt/conda/bin:$PATH
+RUN dpkg-reconfigure locales && \
+    locale-gen C.UTF-8 && \
+    /usr/sbin/update-locale LANG=C.UTF-8
 
-# Copying requirements.txt file
-COPY requirements.txt requirements.txt
-
-# pip install 
-RUN pip install --upgrade pip
-RUN pip install --no-cache -r requirements.txt &&\
-    rm requirements.txt
-
-RUN pip install requests==2.18.4
-RUN conda install gdal==2.2.2
-RUN conda install rasterio==0.36.0
+ENV LC_ALL C.UTF-8
+ENV PYTHONPATH="$PYTHONPATH:/opt/src/"
 
 # Open Ports for Jupyter
 EXPOSE 8888
 
-#Setup File System
-RUN mkdir project
-ENV HOME=/project
-ENV SHELL=/bin/bash
-VOLUME /project
-WORKDIR /project
-
-RUN rm -rf .bash_history
-RUN rm -rf .python_history
-
 # Run a shell script
-CMD ["/bin/bash"]
+CMD  ["/bin/bash"]
+
+

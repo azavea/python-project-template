@@ -69,13 +69,11 @@ target/
 # VS Code
 .vscode/
 
+# Spyder
+.spyproject/
+
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
-.conda
-.jupyter
-.python_history
-.bash_history
-.ipython
 
 # bash history
 .bash_history
@@ -86,5 +84,5 @@ target/
 # exclude data from source control by default
 # /data/
 
-#
-*.conda
+# conda 
+.conda/
