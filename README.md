@@ -13,9 +13,8 @@ From within the repo directory, first remove git tracking from the project
 
 The project template uses a placeholder name of 'da-project'. Change that name in the following files/directories (relative to the repo root):
 - `da-project/` (change the name of the folder)  
-- `Dockerfile`  
 - `./docker/run/`  
-- `./docker/build/`    
+- `./docker/build/`
 
 If you have not already done so, build the Docker image (you will only need to do this once)
 
@@ -25,7 +24,7 @@ Run a Docker container:
 
 `docker/run`  
 
-This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `run` above) will map to `/opt/src/da-project` within the container. You can now access the full file structure of this template from within the container.
+This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `run` above) will map to `/opt/src/` within the container. You can now access the full file structure of this template from within the container.
 
 To exit:
 
@@ -41,7 +40,6 @@ Project Organization
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── interm         <- Intermediate data that has been transformed
-    │   ├── organized      <- Raw datasets that have been renamed or reorganized into a new folder structure but have not been changed at all      
     │   ├── processed      <- The final, canonical data sets for modeling
     │   └── raw            <- The original, immutable data dump
     │
