@@ -2,8 +2,6 @@ FROM python:3.6-slim-stretch
 
 LABEL maintainer="Simon Kassel <skassel@azavea.com>"
 
-WORKDIR /opt/src/
-
 ADD requirements.txt /tmp/requirements.txt
 
 RUN apt-get update && \
@@ -40,6 +38,17 @@ ENV PYTHONPATH="$PYTHONPATH:/opt/src/"
 
 # Open Ports for Jupyter
 EXPOSE 8888
+
+RUN useradd -d /home/user -m -s /bin/bash user && echo "user:user" | chpasswd && adduser user sudo
+
+# start working in the "tester" home directory
+WORKDIR /home/user
+
+# Make the files owned by tester
+RUN chown -R user:user /home/user
+
+# Switch to your new user in the docker image
+USER user
 
 # Run a shell script
 CMD  ["/bin/bash"]
