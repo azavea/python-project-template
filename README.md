@@ -26,6 +26,12 @@ Run a Docker container:
 
 This will open a bash shell within the Docker container. Within the container the 'project' directory on the host machine (as specified as a parameter of `run` above) will map to `/opt/src/` within the container. You can now access the full file structure of this template from within the container.
 
+Run a Jupyter Notebook within Docker container:
+
+`docker/jupyter`
+
+You will need to open the link that is displayed in your terminal.
+
 To exit:
 
 `exit`  
