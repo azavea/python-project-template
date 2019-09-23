@@ -34,7 +34,7 @@ RUN dpkg-reconfigure locales && \
     /usr/sbin/update-locale LANG=C.UTF-8
 
 ENV LC_ALL C.UTF-8
-ENV PYTHONPATH="$PYTHONPATH:/opt/src/"
+ENV PYTHONPATH="$PYTHONPATH:/home/user/"
 
 # Open Ports for Jupyter
 EXPOSE 8888

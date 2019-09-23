@@ -86,3 +86,7 @@ target/
 
 # conda 
 .conda/
+
+.ipython/
+.jupyter/
+.local/
